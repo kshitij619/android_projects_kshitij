@@ -1,6 +1,6 @@
-# alert_prac
+# Android Project
 
-A new Flutter project.
+Here my android projects are saved
 
 ## Getting Started
 
