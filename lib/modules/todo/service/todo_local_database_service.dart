@@ -7,6 +7,7 @@ class TodoLocalDatabaseService {
   final _db = LocalDatabase.instance.database;
 
   Future<TodoModel?> createTodo(TodoModel model) async {
+    await Future.delayed(Duration(seconds: 3));
     try {
       final id = await _db.insert(
         'todos',
@@ -16,7 +17,6 @@ class TodoLocalDatabaseService {
       return model.copyWith(
         id: id,
       );
-      // return model.copyWith();
     } catch (e, s) {
       log(
         'createTodo',

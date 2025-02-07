@@ -18,9 +18,8 @@ class LocalDatabase {
         log('Database created at $path');
         await db.execute(
             'CREATE TABLE todos (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, description TEXT, category TEXT NOT NULL, priority TEXT NOT NULL, status TEXT NOT NULL, createdAt INTEGER NOT NULL, updatedAt INTEGER, deletedAt INTEGER)');
+        log('Created table todos');
       },
     );
   }
 }
-
-// TODO: Start at 30:30

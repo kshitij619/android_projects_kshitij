@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:todo_app/modules/todo/models/todo_category.dart';
 import 'package:todo_app/modules/todo/models/todo_model.dart';
@@ -9,6 +11,10 @@ class TodoViewModel extends ChangeNotifier {
   TodoCategory category = TodoCategory.personal;
   TodoPriority priority = TodoPriority.medium;
   TodoStatus status = TodoStatus.pending;
+
+  List<TodoModel> todos = [];
+
+  bool isLoading = false;
 
   final service = TodoLocalDatabaseService();
 
@@ -30,7 +36,8 @@ class TodoViewModel extends ChangeNotifier {
   void createTodoEvent({
     required String title,
     String? description,
-  }) {
+    required Function(TodoModel? result) onCompleted,
+  }) async {
     final model = TodoModel(
       title: title,
       category: category,
@@ -38,6 +45,23 @@ class TodoViewModel extends ChangeNotifier {
       status: status,
       createdAt: DateTime.now(),
     );
-    service.createTodo(model);
+    isLoading = true;
+    notifyListeners();
+    final result = await service.createTodo(model);
+    onCompleted.call(result);
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void fetchAllTodosEvent() async {
+    isLoading = true;
+    notifyListeners();
+    final result = await service.getAllTodos();
+    log(result?.length.toString() ?? 'Error');
+    todos = result ?? [];
+    isLoading = false;
+    notifyListeners();
   }
 }
+
+// TODO: Start at 26:00
