@@ -16,7 +16,7 @@ class TodoViewModel extends ChangeNotifier {
   bool isLoadingMore = false;
 
   GetTodoRequestModel request = const GetTodoRequestModel(
-      filter: const TodoFilterModel(priority: ['low', 'medium']));
+      filter: TodoFilterModel(priority: ['low', 'medium']));
   int limit = 15;
 
   List<TodoModel> todos = [];
