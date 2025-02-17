@@ -8,7 +8,7 @@ class GetTodoRequestModel {
 
   const GetTodoRequestModel({
     this.query = '',
-    this.limit = 20,
+    this.limit = 15,
     this.offset = 0,
     this.filter = const TodoFilterModel(),
   });
