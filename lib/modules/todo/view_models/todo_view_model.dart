@@ -16,7 +16,12 @@ class TodoViewModel extends ChangeNotifier {
   bool isLoadingMore = false;
 
   GetTodoRequestModel request = const GetTodoRequestModel(
-      filter: TodoFilterModel(priority: ['low', 'medium']));
+    filter: TodoFilterModel(
+      priority: [],
+      category: [],
+      status: [],
+    ),
+  );
   int limit = 15;
 
   List<TodoModel> todos = [];
@@ -24,6 +29,11 @@ class TodoViewModel extends ChangeNotifier {
   int total = 0;
 
   final service = TodoLocalDatabaseService();
+
+  int get totalFilters =>
+      request.filter.priority.length +
+      request.filter.category.length +
+      request.filter.status.length;
 
   void changeTodoCategoryEvent(TodoCategory category) {
     this.category = category;
@@ -114,6 +124,70 @@ class TodoViewModel extends ChangeNotifier {
     request = request.copyWith(
       query: text.trim(),
     );
+    fetchAllTodosEvent();
+  }
+
+  void selectStatusFilterEvent(TodoStatus status) {
+    if (request.filter.status.contains(status)) {
+      request.filter.status.remove(status);
+
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          status: [...request.filter.status..remove(status)],
+        ),
+      );
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          status: [...request.filter.status, status],
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void selectPriorityFilterEvent(TodoPriority priority) {
+    if (request.filter.priority.contains(priority)) {
+      request.filter.priority.remove(priority);
+
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          priority: [...request.filter.priority..remove(priority)],
+        ),
+      );
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          priority: [...request.filter.priority, priority],
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void selectCategoryFilterEvent(TodoCategory category) {
+    if (request.filter.category.contains(category)) {
+      request.filter.category.remove(category);
+
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          category: [...request.filter.category..remove(category)],
+        ),
+      );
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          category: [...request.filter.category, category],
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void applyFilterEvent() {
     fetchAllTodosEvent();
   }
 }
