@@ -1,12 +1,13 @@
 # Android Project
 
-Here my android projects are saved in different branches. 
+Here are my Android projects saved in different branches. 
 
 ## Projects
 
 - Alert Practice (https://github.com/kshitij619/android_projects_kshitij/tree/alert-practice)
 - API Call (https://github.com/kshitij619/android_projects_kshitij/tree/api-call)
 - Counter Project (https://github.com/kshitij619/android_projects_kshitij/tree/counter-project)
+- Counter Project (https://github.com/kshitij619/android_projects_kshitij/tree/firebase-auth)
 - Grid Project (https://github.com/kshitij619/android_projects_kshitij/tree/grid-project)
 - Local Database (https://github.com/kshitij619/android_projects_kshitij/tree/local-database)
 - Pixel App (https://github.com/kshitij619/android_projects_kshitij/tree/pixel-art-app)
